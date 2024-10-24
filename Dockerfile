@@ -1,13 +1,15 @@
 # ベースイメージをAlpineに設定
 FROM openjdk:8-jdk-alpine
 
+# フォントファイルを追加
+COPY SourceHanSansJP.zip /tmp/SourceHanSansJP.zip
+COPY NotoSansJP.zip /tmp/NotoSansJP.zip
+
 # 必要なパッケージをインストール
 RUN apk add --no-cache graphviz curl fontconfig unzip && \
     mkdir -p /usr/share/fonts/noto && \
-    curl -o /tmp/NotoSansCJKjp-hinted.zip https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip && \
-    unzip -o -d /usr/share/fonts/noto /tmp/NotoSansCJKjp-hinted.zip && \
-    curl -o /tmp/NotoSerifCJKjp-hinted.zip https://noto-website-2.storage.googleapis.com/pkgs/NotoSerifCJKjp-hinted.zip && \
-    unzip -o -d /usr/share/fonts/noto /tmp/NotoSerifCJKjp-hinted.zip && \
+    unzip -o -d /usr/share/fonts/noto /tmp/NotoSansJP.zip && \
+    unzip -o -d /usr/share/fonts/noto /tmp/SourceHanSansJP.zip && \
     chmod 644 /usr/share/fonts/noto/*.otf && \
     fc-cache -fv
 
