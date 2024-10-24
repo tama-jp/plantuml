@@ -1,30 +1,30 @@
 @startuml
-title DCP - Cahier des charges\n MOA : <b>obde</b> / MOE : <b>teamflat</b>
+title DCP - 要件定義書\n MOA : <b>obde</b> / MOE : <b>teamflat</b>
 left to right direction
 skinparam shadowing false
 
-class "Role" as role
-class "Adherent" as adherent
-class "Materiel" as materiel
-class "TypeMateriel" as type
-class "Evenement" as evenement
-class "Planning" as planning
-class "Tache" as tache
-class "Demande" as demande
-class "Question" as question
-class "SMSGroupe" as sms
+class "役割" as role
+class "会員" as adherent
+class "機器" as materiel
+class "機器タイプ" as type
+class "イベント" as evenement
+class "計画" as planning
+class "タスク" as tache
+class "要求" as demande
+class "質問" as question
+class "SMSグループ" as sms
 
-evenement "1" -- "0..1" planning
-evenement "1" -- "0..*" adherent
-tache "1..*" -- "1" planning
-tache "0..*" -- "0..*" adherent
-role "0..1" -- "0..*" adherent
-question "0..*" -- "1" adherent
-sms "1..*" -- "0..*" adherent
-role "0..*" -- "0..1" role : dirige
-demande "0..*" - "1" evenement
-adherent "0..*" - "1" demande
-type "0..*" - "1" materiel
-demande "1" - "0..*" materiel
+イベント "1" -- "0..1" 計画
+イベント "1" -- "0..*" 会員
+タスク "1..*" -- "1" 計画
+タスク "0..*" -- "0..*" 会員
+役割 "0..1" -- "0..*" 会員
+質問 "0..*" -- "1" 会員
+SMSグループ "1..*" -- "0..*" 会員
+役割 "0..*" -- "0..1" 役割 : 指揮
+要求 "0..*" - "1" イベント
+会員 "0..*" - "1" 要求
+機器タイプ "0..*" - "1" 機器
+要求 "1" - "0..*" 機器
 
 @enduml

@@ -1,11 +1,11 @@
 @startuml
 start
-:Init Phase;
-:Transfer Phase;
+:初期化フェーズ;
+:転送フェーズ;
 note right
-  long running activity,
-  process requires signal to proceed
+  長時間の活動、
+  プロセスが進行するために信号が必要
 end note
-:Termination Phase;
+:終了フェーズ;
 stop
 @enduml

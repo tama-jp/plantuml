@@ -2,24 +2,24 @@
 autonumber
 
 actor User as user
-participant "Browser UI" as browser
-participant "Reseller UI" as reseller_ui
+participant "ブラウザーUI" as browser
+participant "リセラーUI" as reseller_ui
 
-user -> browser : Visit the Reseller UI login page
-browser -> reseller_ui : Retrieve the Reseller UI login page
-browser <- reseller_ui : Return the login page with form field \nusername, password, and One Time Password(OTP)
-user <- browser : Display the page, wait for user input
-user -> user: Recall username and password \nfrom memory
-user -> browser : Fill in the username and password field
-user -> user: Open Google Authenticator, \nread the OTP
-user -> browser : Fill in the OTP, and hit the send button
-browser -> reseller_ui : Send the username, password and OTP
-reseller_ui -> reseller_ui : Verify the information is valid
-alt Login valid
-    browser <- reseller_ui : Return the logged in page
-    user <- browser : Display the logged in page
-else Login invalid
-    browser <- reseller_ui : Return login failure page
-    user <- browser : Display the login failure page
+user -> browser : リセラーUIのログインページを訪問
+browser -> reseller_ui : リセラーUIのログインページを取得
+browser <- reseller_ui : フォームフィールドを含むログインページを返す\nユーザー名、パスワード、およびワンタイムパスワード(OTP)
+user <- browser : ページを表示し、ユーザーの入力を待機
+user -> user: ユーザー名とパスワードを記憶から呼び出す
+user -> browser : ユーザー名とパスワードフィールドを入力
+user -> user: Google Authenticatorを開き、\nOTPを確認
+user -> browser : OTPを入力し、送信ボタンを押す
+browser -> reseller_ui : ユーザー名、パスワード、およびOTPを送信
+reseller_ui -> reseller_ui : 情報が有効かどうかを確認
+alt ログイン有効
+    browser <- reseller_ui : ログイン後のページを返す
+    user <- browser : ログイン後のページを表示
+else ログイン無効
+    browser <- reseller_ui : ログイン失敗ページを返す
+    user <- browser : ログイン失敗ページを表示
 end
 @enduml

@@ -1,16 +1,16 @@
 @startuml
 
 actor Utilisateur as user
-participant "formSign.js" as form <<Contrôleur formulaire>>
-participant "Sign.java" as controler <<(C,#ADD1B2) Contrôleur formulaire>>
-participant "Secure.java" as secure <<(C,#ADD1B2) authentification>>
-participant "Security.java" as security <<(C,#ADD1B2) sécurité>>
+participant "formSign.js" as form <<フォームコントローラー>>
+participant "Sign.java" as controler <<(C,#ADD1B2) フォームコントローラー>>
+participant "Secure.java" as secure <<(C,#ADD1B2) 認証>>
+participant "Security.java" as security <<(C,#ADD1B2) セキュリティ>>
 
-box "Application Web" #LightBlue
+box "Webアプリケーション" #LightBlue
 	participant form
 end box
 
-box "Serveur Play" #LightGreen
+box "Playサーバー" #LightGreen
 	participant controler
 	participant secure
 	participant security
@@ -22,21 +22,21 @@ form -> form : result = checkFields()
 
 alt result
 
-    form -> controler : formSignIn(email,pwd)
+    form -> controler : formSignIn(メール,パスワード)
     controler -> controler : result = checkFields()
 
     alt result
-    	controler -> secure : Secure.authenticate(email, pwd, true);
+    	controler -> secure : Secure.authenticate(メール, パスワード, true);
     	secure -> security : onAuthenticated()
     	security --> form : renderJSON(0);
-    	form --> user : display main page
+    	form --> user : メインページを表示
     else !result
     	controler --> form : renderJSON(1)
-    	form --> user : display error
+    	form --> user : エラーを表示
     end
 
 else !result
-	form --> user : display error
+	form --> user : エラーを表示
 end
 
 @enduml
